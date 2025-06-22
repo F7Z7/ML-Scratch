@@ -8,8 +8,7 @@ class CrossEntropyLoss:
         cross_entropy_loss=-np.sum(negative_log)
         return cross_entropy_loss
 
-    def backward(self,prob_values, targets):
-        samples = len(prob_values)
-        dvalues_copy = prob_values.copy()
-        dvalues_copy[range(samples), targets] -= 1
-        return dvalues_copy / samples #output/samples
+    def backward(self,predictions, targets):
+        samples = predictions.shape[0]
+        self.dinputs = (predictions - targets) / samples  # derivative of softmax + cross-entropy
+        return self.dinputs
