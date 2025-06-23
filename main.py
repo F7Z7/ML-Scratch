@@ -24,11 +24,12 @@ y=iris.target.reshape(-1,1)
 # _ = ax.legend(
 #     scatter.legend_elements()[0], iris.target_names, loc="lower right", title="Classes"
 # )
-# plt.show()
-encoder = OneHotEncoder(sparse_output=False)
-y_encoded = encoder.fit_transform(y)
+# # plt.show()
+# encoder = OneHotEncoder(sparse_output=False)
+# y_encoded = encoder.fit_transform(y)
 # print(y_encoded)
 #splitin datasets into 80:20 format
+y=iris.target.reshape(-1,1)
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=25)
 
 #3 layer network
@@ -43,7 +44,7 @@ softmax=Softmax_activation()
 loss=CrossEntropyLoss()
 
 epoch=1000 #no of iterations
-lr=0.2 #learning rate
+lr=0.5      #learning rate
 
 
 for epoch in range(epoch):
@@ -66,7 +67,7 @@ for epoch in range(epoch):
     #accuracy
     prediction=np.argmax(final_softmax_output,axis=1)
     # true_classes=np.argmax(y_train,axis=1) #correct
-    accuracy=np.mean(prediction==y_train.flatten())
+    accuracy=np.mean(prediction== y_train.flatten())
 
     if epoch % 100 == 0:
         print(f"Epoch {epoch}, Loss: {output_loss:.4f}, Accuracy: {accuracy * 100:.2f}%")
