@@ -7,6 +7,7 @@ from loss.cross_entropy import CrossEntropyLoss
 from sklearn import datasets
 from sklearn.model_selection import train_test_split #for splitting the data to test and train
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.metrics import classification_report, confusion_matrix
 
 
 import matplotlib.pyplot as plt
@@ -126,4 +127,8 @@ test_accuracy=np.mean(test_prediction==test_true_labels)
 
 print(f"\n✅ Final Test Accuracy: {test_accuracy * 100:.2f}%")
 
+#confusion matrices
+Confusion_Matrix=confusion_matrix(test_true_labels, test_prediction)
+print(Confusion_Matrix)
 
+print(f"Classification Report{classification_report(test_true_labels, test_prediction, target_names=iris.target_names)}")
