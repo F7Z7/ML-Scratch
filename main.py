@@ -25,12 +25,12 @@ y=iris.target.reshape(-1,1)
 #     scatter.legend_elements()[0], iris.target_names, loc="lower right", title="Classes"
 # )
 # # plt.show()
-# encoder = OneHotEncoder(sparse_output=False)
-# y_encoded = encoder.fit_transform(y)
+encoder = OneHotEncoder(sparse_output=False)
+y_encoded = encoder.fit_transform(y)
 # print(y_encoded)
 #splitin datasets into 80:20 format
-y=iris.target.reshape(-1,1)
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=25)
+# y=iris.target.reshape(-1,1)
+X_train, X_test, y_train, y_test = train_test_split(x, y_encoded, test_size=0.2, random_state=25)
 
 #3 layer network
 input_layer=Layer_Dense(4,10)
@@ -42,9 +42,10 @@ relu=Activation_Relu()
 softmax=Softmax_activation()
 #losses
 loss=CrossEntropyLoss()
-
+losses=[]
+accuracies=[]
 epoch=1000 #no of iterations
-lr=0.5      #learning rate
+lr=0.05      #learning rate
 
 
 for epoch in range(epoch):
@@ -67,10 +68,14 @@ for epoch in range(epoch):
     #accuracy
     prediction=np.argmax(final_softmax_output,axis=1)
     # true_classes=np.argmax(y_train,axis=1) #correct
-    accuracy=np.mean(prediction== y_train.flatten())
+    accuracy=np.mean(np.argmax(final_softmax_output, axis=1) == np.argmax(y_train, axis=1))
+
+    losses.append(output_loss)
+    accuracies.append(accuracy)
 
     if epoch % 100 == 0:
         print(f"Epoch {epoch}, Loss: {output_loss:.4f}, Accuracy: {accuracy * 100:.2f}%")
+
 
 
     #backpropoagtion
@@ -83,6 +88,24 @@ for epoch in range(epoch):
     drelu_input=relu.backward(dmiddle)
     dinput=input_layer.backward(drelu_input,lr)
 
+final_avg_accuray=accuracy.mean()
+print(f"Final average accuracy is {final_avg_accuray * 100:.2f}")
+
+plt.subplot(1,2,1)
+plt.figure(figsize=(5,5))
+plt.plot(losses, label='loss',color='red')
+plt.title("Loss over Epochs")
+plt.xlabel("Epoch")
+plt.ylabel("Loss")
+plt.grid(True)
+
+plt.subplot(1,2,2)
+plt.plot(accuracies, label='accuracy',color='blue')
+plt.title("Accuracy over Epochs")
+plt.xlabel("Epoch")
+plt.ylabel("Accuracy")
+plt.grid(True)
+plt.show()
 
 
 
