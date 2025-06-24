@@ -1,7 +1,7 @@
 import numpy as np
 
-from layers.activation_relu import Activation_Relu
-from layers.activation_softmax import Softmax_activation
+from activations.activation_relu import Activation_Relu
+from activations.activation_softmax import Softmax_activation
 from layers.dense import Layer_Dense
 from loss.cross_entropy import CrossEntropyLoss
 from sklearn import datasets
