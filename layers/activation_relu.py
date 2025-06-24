@@ -7,5 +7,5 @@ class Activation_Relu:
         return self.outputs
     def backward(self,dvalues):
         dinputs = dvalues.copy()
-        dinputs[dvalues < 0] = 0 #if less than 0=0,else the value passes
+        dinputs[self.inputs <= 0] = 0 #if less than 0=0,else the value passes
         return dinputs
