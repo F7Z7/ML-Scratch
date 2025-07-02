@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.datasets import load_wine
 
 from activations.activation_relu import Activation_Relu
 from activations.activation_softmax import Softmax_activation
@@ -12,9 +13,11 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 import matplotlib.pyplot as plt
 
-iris = datasets.load_iris()
-x=iris.data
-y=iris.target.reshape(-1,1)
+Wine = load_wine()
+
+X=Wine.data
+y=Wine.target.reshape(-1,1) #reshaping for one hot encoding
+print(y.shape)
 # print(x,y)
 # print(iris.feature_names)  # 4inputs and 3 outpua
 
@@ -31,12 +34,12 @@ y_encoded = encoder.fit_transform(y)
 # print(y_encoded)
 #splitin datasets into 80:20 format
 # y=iris.target.reshape(-1,1)
-X_train, X_test, y_train, y_test = train_test_split(x, y_encoded, test_size=0.2, random_state=25)
+X_train, X_test, y_train, y_test = train_test_split(X, y_encoded, test_size=0.2, random_state=25)
 
 #3 layer network
-input_layer=Layer_Dense(4,10)
-middle_layer=Layer_Dense(10,10)
-output_layer=Layer_Dense(10,3)
+input_layer=Layer_Dense(13,100)
+middle_layer=Layer_Dense(100,100)
+output_layer=Layer_Dense(100,3)
 
 #activations
 relu=Activation_Relu()
@@ -131,4 +134,4 @@ print(f"\n✅ Final Test Accuracy: {test_accuracy * 100:.2f}%")
 Confusion_Matrix=confusion_matrix(test_true_labels, test_prediction)
 print(Confusion_Matrix)
 
-print(f"Classification Report{classification_report(test_true_labels, test_prediction, target_names=iris.target_names)}")
+print(f"Classification Report{classification_report(test_true_labels, test_prediction, target_names=Wine.target_names)}")

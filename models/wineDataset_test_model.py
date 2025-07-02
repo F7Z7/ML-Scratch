@@ -56,3 +56,4 @@ for epoch in range(epoch):
 
 
     #losses
+
