@@ -12,15 +12,18 @@ class Layer_Dense:
 
         return self.output
 
-    def backward(self, dvalues, lr):
+    def backward(self, dvalues):
         self.dweights = np.dot(self.inputs.T, dvalues)
         self.dbiases = np.sum(dvalues, axis=0)  # summing all biases
 
         self.dinputs = np.dot(dvalues, self.weights.T)
 
         # new weight=pld weight-lr*loss
-        self.weights -= lr * self.dweights
-        self.biases -= lr * self.dbiases
+
 
         return self.dinputs
+
+    def update_params(self, lr):
+        self.weights -= lr * self.dweights
+        self.biases -= lr * self.dbiases
 
