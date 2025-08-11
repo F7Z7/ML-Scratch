@@ -7,7 +7,7 @@ from layers.dense import Layer_Dense
 from loss.cross_entropy import CrossEntropyLoss
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # for splitting the data to test and train
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix
 
 import matplotlib.pyplot as plt
@@ -28,12 +28,15 @@ print(y.shape)
 #     scatter.legend_elements()[0], iris.target_names, loc="lower right", title="Classes"
 # )
 # # plt.show()
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X) #scales the input
+
 encoder = OneHotEncoder(sparse_output=False)
 y_encoded = encoder.fit_transform(y)
 # print(y_encoded)
 # splitin datasets into 80:20 format
 # y=iris.target.reshape(-1,1)
-X_train, X_test, y_train, y_test = train_test_split(X, y_encoded, test_size=0.2, random_state=25)
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y_encoded, test_size=0.2, random_state=25)
 
 # 3 layer network
 input_layer = Layer_Dense(13, 100)
