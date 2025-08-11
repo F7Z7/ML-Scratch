@@ -124,6 +124,7 @@ print(Confusion_Matrix)
 disp = ConfusionMatrixDisplay(confusion_matrix=Confusion_Matrix,display_labels=Wine.target_names)
 disp.plot(ax=axs[1,0],cmap=plt.cm.Blues,colorbar=False)
 axs[1,0].set_title("Confusion Matrix")
+plt.subplots_adjust(wspace=0.4, hspace=0.6)
 plt.show()
 print(
     f"Classification Report{classification_report(test_true_labels, test_prediction, target_names=Wine.target_names)}")
