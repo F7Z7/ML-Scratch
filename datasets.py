@@ -1,5 +1,6 @@
 # from sklearn.datasets import make_moons
 from nnfs.datasets import spiral_data
+from sklearn.datasets import load_iris,load_wine
 
 
 def load_data():
