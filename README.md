@@ -155,7 +155,7 @@ Achieved <b>90%+ accuracy</b> across the tested datasets, confirming proper trai
 
   <table style="border: none; text-align: center;">
     <tr>
-      <td><img src="images/breast_result.png" alt="Breast Cancer Dataset Result" width="250"></td>
+      <td><img src="images/breast_results.png" alt="Breast Cancer Dataset Result" width="250"></td>
     </tr>
     <tr>
       <td><b>Breast Cancer Dataset</b></td>
@@ -164,7 +164,7 @@ Achieved <b>90%+ accuracy</b> across the tested datasets, confirming proper trai
 
   <table style="border: none; text-align: center;">
     <tr>
-      <td><img src="images/wine_result.jpg" alt="Wine Dataset Results" width="250"></td>
+      <td><img src="images/wine_results.jpg" alt="Wine Dataset Results" width="250"></td>
     </tr>
     <tr>
       <td><b>Wine Dataset</b></td>
@@ -173,7 +173,7 @@ Achieved <b>90%+ accuracy</b> across the tested datasets, confirming proper trai
 
   <table style="border: none; text-align: center;">
     <tr>
-      <td><img src="images/iris_result.jpg" alt="Iris Dataset Results" width="250"></td>
+      <td><img src="images/iris_results.jpg" alt="Iris Dataset Results" width="250"></td>
     </tr>
     <tr>
       <td><b>Iris Dataset</b></td>
