@@ -115,7 +115,7 @@ test_prediction = np.argmax(test_final_output, axis=1)
 test_true_labels = y_test.argmax(axis=1)
 test_accuracy = np.mean(test_prediction == test_true_labels)
 
-print(f"\n✅ Final Test Accuracy: {test_accuracy * 100:.2f}%")
+print(f"\n Final Test Accuracy: {test_accuracy * 100:.2f}%")
 
 # confusion matrices
 Confusion_Matrix = confusion_matrix(test_true_labels, test_prediction)
