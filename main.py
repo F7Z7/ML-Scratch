@@ -4,5 +4,5 @@ from models.breastCancer_Model import run as run_bc
 
 if __name__ == "__main__":
     run_wine()
-    # run_iris()
-    # run_bc()
+    run_iris()
+    run_bc()
