@@ -44,13 +44,13 @@ class BaseNNModel:
         self.target_names = target_names
 
     def forward(self, X):
-        x = self.relu.forward(self.input_layer.forward(X))
-        x = self.relu.forward(self.middle_layer.forward(x))
+        x = self.relu1.forward(self.input_layer.forward(X))
+        x = self.relu2.forward(self.middle_layer.forward(x))
         x = self.output_layer.forward(x)
         return self.softmax.forward(x)
 
-    def backward(self, y_pred):
-        dloss = self.loss_fn.backward(y_pred, self.y_train)
+    def backward(self, y_pred, y_true):
+        dloss = self.loss_fn.backward(y_pred, y_true)
 
         dx = self.output_layer.backward(dloss)
         dx = self.relu2.backward(dx)
@@ -78,7 +78,7 @@ class BaseNNModel:
             if epoch % 100 == 0:
                 print(f"[{self.cfg.name}] Epoch {epoch} | Loss: {loss:.4f} | Acc: {acc*100:.2f}%")
 
-            self.backward(y_pred)
+            self.backward(y_pred,self.y_train)
 
     def evaluate(self):
         y_pred = self.forward(self.X_test)
