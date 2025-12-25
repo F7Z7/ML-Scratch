@@ -13,7 +13,9 @@ from loss.cross_entropy import CrossEntropyLoss
 class BaseNNModel:
     def __init__(self, config):
         self.cfg = config
-        self.relu = Activation_Relu()
+        self.relu1 = Activation_Relu()
+        self.relu2 = Activation_Relu()
+
         self.softmax = Softmax_activation()
         self.loss_fn = CrossEntropyLoss()
 
@@ -51,10 +53,10 @@ class BaseNNModel:
         dloss = self.loss_fn.backward(y_pred, self.y_train)
 
         dx = self.output_layer.backward(dloss)
-        dx = self.relu.backward(dx)
-
+        dx = self.relu2.backward(dx)
         dx = self.middle_layer.backward(dx)
-        dx = self.relu.backward(dx)
+        dx = self.relu1.backward(dx)
+        self.input_layer.backward(dx)
 
         self.input_layer.backward(dx)
 
