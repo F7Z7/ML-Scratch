@@ -58,7 +58,7 @@ class BaseNNModel:
         dx = self.relu1.backward(dx)
         self.input_layer.backward(dx)
 
-        self.input_layer.backward(dx)
+
 
         for layer in [self.output_layer, self.middle_layer, self.input_layer]:
             layer.update_params(self.cfg.lr)
