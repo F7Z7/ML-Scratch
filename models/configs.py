@@ -19,6 +19,10 @@ class WineConfig(BaseConfig):
     name = "Wine"
     input_size = 13
     num_classes = 3
+    hidden_size = 25
+    epochs = 400
+    lr=0.5
+    scale = True
 
     @staticmethod
     def load_dataset():
@@ -30,6 +34,7 @@ class IrisConfig(BaseConfig):
     name = "Iris"
     input_size = 4
     hidden_size = 10
+    epochs = 300
     num_classes = 3
     lr = 0.05
     scale = False
@@ -44,6 +49,10 @@ class BreastCancerConfig(BaseConfig):
     name = "Breast Cancer"
     input_size = 30
     num_classes = 2
+    hidden_size = 35
+    epochs = 500
+    lr=0.05
+    scale = True
 
     @staticmethod
     def load_dataset():
