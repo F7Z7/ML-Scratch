@@ -131,9 +131,3 @@ Contributions, issues, and feature requests are welcome. If you add a new model 
 This project is intended for learning and demonstration. If you reuse substantial parts of the code or documentation, please attribute the original author.
 
 ---
-
-If you'd like, I can:
-- 1) Update the README in the repository now (open a PR / push commit), or
-- 2) Update this draft to use the exact config filename and any precise wording you prefer.
-
-Which would you like me to do? If option 1, please confirm and provide the config filename (if any) or confirm I should reference `models/base_model.py` and a generic "models config" entry as above.
