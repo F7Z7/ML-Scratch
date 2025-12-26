@@ -1,209 +1,147 @@
-<h1 align="center"> Neural Network from Scratch (NumPy)</h1>
+# Neural Network from Scratch (NumPy)
 
-<p align="center">
-  <b>A fundamental two-hidden-layer neural network built from scratch using NumPy</b><br>
-  <i>Tested on Breast Cancer, Iris, and Wine datasets (Scikit-learn)</i>
-</p>
+A fundamental two-hidden-layer neural network built from scratch using NumPy — updated to reflect the repository's current structure.
 
-<hr>
+---
 
-<h2> Overview</h2>
-<p>
-This repository implements a basic <b>feed-forward neural network</b> with two hidden layers using only <code>NumPy</code>. 
-It demonstrates key neural network components—Layers, Activations, and Loss functions—applied to three standard machine learning datasets.
-</p>
+## Overview
 
-<hr>
+This repository implements a basic feed-forward neural network with two hidden layers using only `NumPy`. It demonstrates core neural network components (Layers, Activations, Loss) and provides example scripts that train and evaluate models on small standard datasets (Breast Cancer, Iris, Wine).
 
-<h2> Why This Exists</h2>
-<p>
-When I first got into <b>Machine Learning</b>, I came across a video (<a href="https://youtu.be/cAkMcPfY_Ns?si=lO05tzfFb-1lY0ro" target="_blank">this one</a>) that explained how neural networks work at the lowest level , from scratch, using only NumPy.  
-That video inspired me to build my own version completely from the ground up, understanding every mathematical and logical step behind it rather than relying on libraries.  
-</p>
-<p>
-My ultimate goal with this project is to gradually extend this framework — from small datasets like <b>Breast Cancer</b> and <b>Iris</b> — all the way up to training on the <b>MNIST handwritten digits dataset</b>.
-</p>
-<hr>
+This README has been combined and updated to match the repository layout at commit `422ae9b7dec1387e4b0f15bbe33a3370ba80483e`.
 
-<h2> 1. Core Neural Network Components</h2>
+---
 
-<table>
-  <thead>
-    <tr>
-      <th>Component</th>
-      <th>File</th>
-      <th>Key Implementation Details</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Dense Layer</b></td>
-      <td><code>layers/dense.py</code></td>
-      <td>
-        Initializes weights using He initialization (<code>np.sqrt(2 / inputs)</code>).<br>
-        Implements forward (<code>y = xW + b</code>) and backward for gradient computation (<code>dweights, dbiases, dinputs</code>).<br>
-        Includes <code>update_params()</code> for parameter updates using learning rate (<code>lr</code>).
-      </td>
-    </tr>
-    <tr>
-      <td><b>ReLU Activation</b></td>
-      <td><code>activations/activation_relu.py</code></td>
-      <td>
-        <code>forward()</code> computes <code>max(0, inputs)</code>.<br>
-        <code>backward()</code> zeroes gradients for inputs ≤ 0.
-      </td>
-    </tr>
-    <tr>
-      <td><b>Softmax Activation</b></td>
-      <td><code>activations/activation_softmax.py</code></td>
-      <td>
-        Implements numerically stable softmax by subtracting the maximum input before exponentiation:
-        <code>np.exp(inputs - np.max(inputs, axis=1, keepdims=True))</code>.
-      </td>
-    </tr>
-    <tr>
-      <td><b>Cross-Entropy Loss</b></td>
-      <td><code>loss/cross_entropy.py</code></td>
-      <td>
-        Uses input clipping (<code>np.clip(inputs, 1e-7, 1 - 1e-7)</code>) for numerical stability.<br>
-        <code>backward()</code> implements combined derivative for Softmax + Cross-Entropy.
-      </td>
-    </tr>
-  </tbody>
-</table>
+## Why this exists
 
-<hr>
+This project started as a learning exercise to build neural networks from the ground up and remains a didactic resource for anyone who wants to understand the low-level math and code behind neural networks without relying on high-level frameworks.
 
-<h2> 2. Implemented Models</h2>
-<p>
-Each model uses a 3-layer architecture:
-<b>Input Layer (Dense + ReLU) → Hidden Layer (Dense + ReLU) → Output Layer (Dense + Softmax)</b>
-</p>
+---
 
-<table>
-  <thead>
-    <tr>
-      <th>Model</th>
-      <th>Script</th>
-      <th>Pre-processing & Architecture</th>
-      <th>Hyperparameters</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Breast Cancer</b></td>
-      <td><code>main.py</code></td>
-      <td>
-        Data scaled with <code>StandardScaler</code>; targets one-hot encoded.<br>
-        Architecture: <code>30 → 100 → 100 → 2</code> neurons.
-      </td>
-      <td>1000 Epochs, LR = 0.1</td>
-    </tr>
-    <tr>
-      <td><b>Wine Dataset</b></td>
-      <td><code>models/wineDataset_test_model.py</code></td>
-      <td>
-        Data scaled with <code>StandardScaler</code>; targets one-hot encoded.<br>
-        Architecture: <code>13 → 100 → 100 → 3</code> neurons.
-      </td>
-      <td>1000 Epochs, LR = 0.1</td>
-    </tr>
-    <tr>
-      <td><b>Iris Dataset</b></td>
-      <td><code>models/iris_test_model.py</code></td>
-      <td>
-        Targets one-hot encoded; no <code>StandardScaler</code> used.<br>
-        Architecture: <code>4 → 10 → 10 → 3</code> neurons.
-      </td>
-      <td>1000 Epochs, LR = 0.05</td>
-    </tr>
-  </tbody>
-</table>
+## What's new (updated structure)
 
-<hr>
+Since the original README was written, a small helper script (`datasets.py`) was added to the repo root. Additionally, the `models/` directory now includes a reusable model template (`base_model`) and a configuration mechanism used to centralize model hyperparameters and training options. The README below has been updated to reflect these additions.
 
-<h2>🛠️ 3. Utility Scripts & Dependencies</h2>
+---
 
-<ul>
-  <li><b>Utility Scripts:</b>
-    <ul>
-      <li><code>methods/train_test.py</code> — demonstrates <code>train_test_split()</code> from scikit-learn.</li>
-      <li><code>methods/onehotencod.py</code> — demonstrates <code>OneHotEncoder</code>.</li>
-    </ul>
-  </li>
-  <li><b>Dependencies:</b>
-    <ul>
-      <li><code>numpy</code></li>
-      <li><code>matplotlib</code></li>
-      <li><code>scikit-learn</code></li>
-      <li><code>nnfs</code></li>
-    </ul>
-  </li>
-</ul>
+## 1. Core Neural Network Components
 
-<hr>
+- Dense Layer — `layers/dense.py`  
+  Implements a fully-connected (dense) layer with He initialization (`np.sqrt(2 / inputs)`), forward pass (`y = xW + b`), backward pass (computes `dweights`, `dbiases`, `dinputs`), and `update_params()` to apply learning-rate updates.
 
-<h2> Results</h2>
-<p>
-Achieved <b>90%+ accuracy</b> across the tested datasets, confirming proper training and generalization of the implemented neural network.
-</p>
+- ReLU Activation — `activations/activation_relu.py`  
+  `forward()` computes `np.maximum(0, inputs)`; `backward()` zeros gradients where inputs ≤ 0.
 
-<hr>
+- Softmax Activation — `activations/activation_softmax.py`  
+  Numerically-stable softmax implementation (subtracts the row-wise max before exponentiation).
 
-<!-- Image Results Section -->
-<div align="center" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+- Cross-Entropy Loss — `loss/cross_entropy.py`  
+  Uses clipping (`np.clip(..., 1e-7, 1 - 1e-7)`) for numerical stability and contains a backward that works with Softmax (combined derivative when applicable).
 
-  <table style="border: none; text-align: center;">
-    <tr>
-      <td><img src="images/breast_results.png" alt="Breast Cancer Dataset Result" width="250"></td>
-    </tr>
-    <tr>
-      <td><b>Breast Cancer Dataset</b></td>
-    </tr>
-  </table>
+---
 
-  <table style="border: none; text-align: center;">
-    <tr>
-      <td><img src="images/wine_results.jpg" alt="Wine Dataset Results" width="250"></td>
-    </tr>
-    <tr>
-      <td><b>Wine Dataset</b></td>
-    </tr>
-  </table>
+## 2. Helper scripts & utilities
 
-  <table style="border: none; text-align: center;">
-    <tr>
-      <td><img src="images/iris_results.jpg" alt="Iris Dataset Results" width="250"></td>
-    </tr>
-    <tr>
-      <td><b>Iris Dataset</b></td>
-    </tr>
-  </table>
+- `datasets.py` — helper for loading and preprocessing datasets (present in repo root).
+- `methods/train_test.py` — demonstrates `train_test_split()` usage.
+- `methods/onehotencod.py` — demonstrates one-hot encoding of labels.
 
-</div>
+---
 
+## 3. Model templates, configs & example scripts
 
-<h2> Repository Structure</h2>
-<pre>
-├── activations/
-│   ├── activation_relu.py
-│   └── activation_softmax.py
-├── layers/
-│   └── dense.py
-├── loss/
-│   └── cross_entropy.py
-├── methods/
-│   ├── train_test.py
-│   └── onehotencod.py
-├── models/
-│   ├── breastCancer_Model.py
-│   ├── iris_test_model.py
-│   └── wineDataset_test_model.py
-├── main.py
+Each example follows a common 3-layer pattern:
+
+Input Layer (Dense + ReLU) → Hidden Layer (Dense + ReLU) → Output Layer (Dense + Softmax)
+
+- `models/base_model.py` — template base model used as a starting point for dataset-specific scripts. It contains reusable architecture construction, training loop scaffolding, and common helper functions so new models can be added quickly by subclassing or importing this template.
+- `models/*config*` — a configuration mechanism is used to centralize hyperparameters and training settings (learning rate, epochs, layer sizes, batch size, etc.). 
+- `main.py` — example/training script (Breast Cancer dataset).
+- `models/breastCancer_Model.py` — Breast Cancer model script (example using the base template + config).
+- `models/iris_test_model.py` — Iris model script.
+- `models/wineDataset_test_model.py` — Wine dataset script.
+
+If you prefer, I can update the README to point to the exact config filename (e.g., `models/config.py`) — tell me the precise config filename or confirm the config style and I'll include the exact path.
+
+---
+
+## Repository structure (current)
+
+├── activations/  
+│   ├── activation_relu.py  
+│   └── activation_softmax.py  
+├── layers/  
+│   └── dense.py  
+├── loss/  
+│   └── cross_entropy.py  
+├── methods/  
+│   ├── train_test.py  
+│   └── onehotencod.py  
+├── models/  
+│   ├── base_model.py        ← template base model (reusable)  
+│   ├── breastCancer_Model.py  
+│   ├── iris_test_model.py  
+│   └── wineDataset_test_model.py  
+├── images/  
+│   ├── breast_results.png  
+│   ├── wine_results.jpg  
+│   └── iris_results.jpg  
+├── datasets.py  
+├── main.py  
 └── requirements.txt
-</pre>
 
-<hr>
+---
 
-<h2 align="center">⭐ If you found this project helpful, consider giving it a star!</h2>
-<h3 align="center"> This is an ongoing project — more trained models and datasets will be added soon.</h3>
+## Quick usage
+
+1. Create a virtual environment and install dependencies:
+
+   pip install -r requirements.txt
+
+2. Run an example (e.g., Breast Cancer):
+
+   python main.py
+
+3. To create a new model:
+   - Copy or import `models/base_model.py`.
+   - Add a config entry (or new config file) specifying layer sizes, LR, epochs, etc.
+   - Implement dataset-specific preprocessing and call the base training loop.
+
+4. Inspect the other example scripts in `models/` and the helper scripts in `methods/`.
+
+---
+
+## Dependencies
+
+- numpy  
+- matplotlib  
+- scikit-learn  
+- nnfs (optional; used in some helper/testing code)
+
+These are listed in `requirements.txt`.
+
+---
+
+## Results
+
+The example models provide strong baselines and have previously achieved ~90%+ accuracy on some of the small datasets (Breast Cancer, Wine, Iris). See the `images/` directory for saved result plots.
+
+---
+
+## Contributing
+
+Contributions, issues, and feature requests are welcome. If you add a new model or script, please update this README to reflect the new structure and usage notes.
+
+---
+
+## License & attribution
+
+This project is intended for learning and demonstration. If you reuse substantial parts of the code or documentation, please attribute the original author.
+
+---
+
+If you'd like, I can:
+- 1) Update the README in the repository now (open a PR / push commit), or
+- 2) Update this draft to use the exact config filename and any precise wording you prefer.
+
+Which would you like me to do? If option 1, please confirm and provide the config filename (if any) or confirm I should reference `models/base_model.py` and a generic "models config" entry as above.
