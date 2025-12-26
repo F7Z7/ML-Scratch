@@ -8,19 +8,11 @@ A fundamental two-hidden-layer neural network built from scratch using NumPy —
 
 This repository implements a basic feed-forward neural network with two hidden layers using only `NumPy`. It demonstrates core neural network components (Layers, Activations, Loss) and provides example scripts that train and evaluate models on small standard datasets (Breast Cancer, Iris, Wine).
 
-This README has been combined and updated to match the repository layout at commit `422ae9b7dec1387e4b0f15bbe33a3370ba80483e`.
-
 ---
 
 ## Why this exists
 
 This project started as a learning exercise to build neural networks from the ground up and remains a didactic resource for anyone who wants to understand the low-level math and code behind neural networks without relying on high-level frameworks.
-
----
-
-## What's new (updated structure)
-
-Since the original README was written, a small helper script (`datasets.py`) was added to the repo root. Additionally, the `models/` directory now includes a reusable model template (`base_model`) and a configuration mechanism used to centralize model hyperparameters and training options. The README below has been updated to reflect these additions.
 
 ---
 
@@ -61,7 +53,6 @@ Input Layer (Dense + ReLU) → Hidden Layer (Dense + ReLU) → Output Layer (Den
 - `models/iris_test_model.py` — Iris model script.
 - `models/wineDataset_test_model.py` — Wine dataset script.
 
-If you prefer, I can update the README to point to the exact config filename (e.g., `models/config.py`) — tell me the precise config filename or confirm the config style and I'll include the exact path.
 
 ---
 
@@ -78,6 +69,7 @@ If you prefer, I can update the README to point to the exact config filename (e.
 │   ├── train_test.py  
 │   └── onehotencod.py  
 ├── models/  
+|── |── config.py ← for setting up the parameters of each model
 │   ├── base_model.py        ← template base model (reusable)  
 │   ├── breastCancer_Model.py  
 │   ├── iris_test_model.py  
@@ -113,10 +105,10 @@ If you prefer, I can update the README to point to the exact config filename (e.
 
 ## Dependencies
 
-- numpy  
-- matplotlib  
-- scikit-learn  
-- nnfs (optional; used in some helper/testing code)
+- numpy  //core library
+- matplotlib  // for plotting 
+- scikit-learn  //for datasets and confusion matrices
+- nnfs (optional; used in some helper/testing code) //initially used for simple datasets
 
 These are listed in `requirements.txt`.
 
