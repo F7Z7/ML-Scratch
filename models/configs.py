@@ -1,5 +1,7 @@
 from sklearn.datasets import load_wine, load_iris, load_breast_cancer
 
+from mnist_datasets import mnist_datasets
+
 
 class BaseConfig:
     name = ""
@@ -58,3 +60,17 @@ class BreastCancerConfig(BaseConfig):
     def load_dataset():
         data = load_breast_cancer()
         return data.data, data.target, data.target_names
+
+class MNISTConfig(BaseConfig):
+    name = "MNIST"
+    input_size = 784
+    num_classes = 10
+    hidden_size = 128
+    epochs = 600
+    lr=0.1
+    scale = True
+
+    @staticmethod
+    def load_dataset():
+        data=mnist_datasets()
+        return data.load_data()
