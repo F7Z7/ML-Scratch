@@ -72,5 +72,7 @@ class MNISTConfig(BaseConfig):
 
     @staticmethod
     def load_dataset():
-        data=mnist_datasets()
-        return data.load_data()
+        data = mnist_datasets()
+        X, y = data.load_data()
+        target_names = [str(i) for i in range(10)]
+        return X, y, target_names
