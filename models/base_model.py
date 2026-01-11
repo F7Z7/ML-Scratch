@@ -89,9 +89,36 @@ class BaseNNModel:
 
         print(f"\n {self.cfg.name} Test Accuracy: {np.mean(preds == true)*100:.2f}%")
         print(classification_report(true, preds, target_names=self.target_names))
+        self.show_results(self, true, preds)
+
+    def show_results(self, true, preds):
+        fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+
+
+        axes = axes.flatten()
+
+
+        axes[0].plot(self.losses, label="Loss", color="red")
+        axes[0].set_title(f"{self.cfg.name} Training Loss")
+        axes[0].set_xlabel("Epochs")
+        axes[0].set_ylabel("Loss")
+        axes[0].legend()
+
+
+        axes[1].plot(self.accuracies, label="Accuracy", color="green")
+        axes[1].set_title(f"{self.cfg.name} Training Accuracy")
+        axes[1].set_xlabel("Epochs")
+        axes[1].set_ylabel("Accuracy")
+        axes[1].legend()
+
 
         cm = confusion_matrix(true, preds)
         disp = ConfusionMatrixDisplay(cm, display_labels=self.target_names)
-        disp.plot(cmap=plt.cm.Blues)
-        plt.title(self.cfg.name)
+        disp.plot(ax=axes[2], cmap=plt.cm.Blues)
+        axes[2].set_title(f"{self.cfg.name} Confusion Matrix")
+
+
+        axes[3].axis("off")  # leave blank for now
+
+        plt.tight_layout()
         plt.show()
