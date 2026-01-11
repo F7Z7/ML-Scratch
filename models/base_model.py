@@ -32,7 +32,9 @@ class BaseNNModel:
     def load_data(self):
         X, y, target_names = self.cfg.load_dataset()
 
-        if self.cfg.scale:
+
+
+        if self.cfg.scale and self.cfg.name != "MNIST": ## skip for mnist as it's already normalized
             X = StandardScaler().fit_transform(X)
 
         y = OneHotEncoder(sparse_output=False).fit_transform(y.reshape(-1, 1))
