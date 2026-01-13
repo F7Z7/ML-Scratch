@@ -1,6 +1,6 @@
 # Neural Network from Scratch (NumPy)
 
-A fundamental two-hidden-layer neural network built from scratch using NumPy — updated to reflect the repository's current structure.
+A fundamental two-hidden-layer neural network built from scratch using NumPy.
 
 ---
 
