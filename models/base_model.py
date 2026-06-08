@@ -89,7 +89,7 @@ class BaseNNModel:
 
         print(f"\n {self.cfg.name} Test Accuracy: {np.mean(preds == true)*100:.2f}%")
         print(classification_report(true, preds, target_names=self.target_names))
-        self.show_results(self, true, preds)
+        self.show_results(true, preds)
 
     def show_results(self, true, preds):
         fig, axes = plt.subplots(2, 2, figsize=(12, 10))

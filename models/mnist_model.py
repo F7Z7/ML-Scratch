@@ -7,4 +7,4 @@ def run():
     model.load_data()
     model.train()
     model.evaluate()
-    model.show_results()
+    # model.show_results()
