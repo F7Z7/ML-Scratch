@@ -118,7 +118,7 @@ class BaseNNModel:
         axes[2].set_title(f"{self.cfg.name} Confusion Matrix")
 
 
-        axes[3].axis("off")  # leave blank for now
+        axes[3].axis("off")
 
         plt.tight_layout()
         plt.show()
